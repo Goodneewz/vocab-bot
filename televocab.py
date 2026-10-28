@@ -38,6 +38,7 @@ def start_health_server():
     threading.Thread(target=server.serve_forever, daemon=True).start()
 
 # --- Config ---
+ADMIN_IDS = {8793130050} 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 DICT_API = "https://api.dictionaryapi.dev/api/v2/entries/en/<word>"
 DATA_FILE = Path("user_words.json")
