@@ -14,6 +14,29 @@ from telegram.ext import (
     filters,
 )
 
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+
+class Health(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"ok")
+
+    def do_HEAD(self):
+        self.send_response(200)
+        self.end_headers()
+
+    def log_message(self, *args):
+        pass
+
+
+def start_health_server():
+    port = int(os.environ.get("PORT", 10000))
+    server = HTTPServer(("0.0.0.0", port), Health)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+
 # --- Config ---
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 DICT_API = "https://api.dictionaryapi.dev/api/v2/entries/en/<word>"
