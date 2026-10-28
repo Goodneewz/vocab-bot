@@ -3,6 +3,7 @@ import json
 import random
 import logging
 import requests
+#import .env
 from pathlib import Path
 from telegram import Update
 from telegram.ext import (
@@ -14,8 +15,9 @@ from telegram.ext import (
 )
 
 # --- Config ---
+#BOT_TOKEN="8763253735:AAFBcoyRvKsWDzh9iJiHQ03DqjbELp9oWLU"
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-DICT_API = "https://freedictionaryapi.com/api/v1/entries/en"
+DICT_API = "https://api.dictionaryapi.dev/api/v2/entries/en/<word>"
 DATA_FILE = Path("user_words.json")
 
 logging.basicConfig(level=logging.INFO)
